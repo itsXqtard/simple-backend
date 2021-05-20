@@ -43,6 +43,10 @@ app.get('/birth_date', (req, res) => {
     res.send(Sinatra.birth_date);
 });
 
+app.get('/birth_city', (req, res) => {
+    res.send(Sinatra.birth_city);
+});
+
 app.get('/wives', (req, res) => {
     res.send(Sinatra.wives.join(', '));
 });
