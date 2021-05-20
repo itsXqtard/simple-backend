@@ -2,6 +2,11 @@ const express = require('express')
 const app = express()
 const port = 8080
 
+const server_responses = {
+    public : "Everybody can see this page",
+    protected : "Welcome, authenticated client"
+}
+
 const sinatra_songs = [
     "My Blue Heaven", 
     "My First Edition", 
@@ -50,6 +55,16 @@ app.get('/birth_city', (req, res) => {
 app.get('/wives', (req, res) => {
     res.send(Sinatra.wives.join(', '));
 });
+
+app.get('/public', (req, res) => {
+    res.send(server_responses.public);
+});
+
+app.get('/protected', (req, res) => {
+    console.log(res.body);
+    res.send(server_responses.protected);
+});
+
 
 app.listen(port, () => {
   console.log(`Example app listening at http://web-af66687d2-fadb.docode.qwasar.io`)
