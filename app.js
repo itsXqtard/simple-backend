@@ -82,18 +82,9 @@ app.get('/wives', (req, res) => {
 
 
 app.get('/picture', async (req, res) => {
-  const url = 'https://upload.wikimedia.org/wikipedia/commons/a/af/Frank_Sinatra_%2757.jpg';
+  const picture = '(https://upload.wikimedia.org/wikipedia/commons/a/af/Frank_Sinatra_%2757.jpg)';
+  res.send(picture);
 
-  request({
-    url: url,
-    encoding: null
-  }, 
-  (err, resp, buffer) => {
-    if (!err && resp.statusCode === 200){
-      res.set("Content-Type", "image/jpeg");
-      res.send(resp.body);
-    }
-  });
 });
 
 /**
