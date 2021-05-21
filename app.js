@@ -1,10 +1,12 @@
 const express = require('express')
+const basicAuth = require('express-basic-auth')
 const app = express()
 const port = 8080
 
 const server_responses = {
     public : "Everybody can see this page",
-    protected : "Welcome, authenticated client"
+    protected : "Welcome, authenticated client",
+    unauthorized : "Not authorized"
 }
 
 const sinatra_songs = [
@@ -60,12 +62,18 @@ app.get('/public', (req, res) => {
     res.send(server_responses.public);
 });
 
+app.use(basicAuth({
+    users: { 'admin': 'admin' },
+    unauthorizedResponse : `${server_responses.unauthorized}`
+}))
+
 app.get('/protected', (req, res) => {
-    console.log(res.body);
+    console.log("credentials", req.auth);
     res.send(server_responses.protected);
 });
 
 
 app.listen(port, () => {
-  console.log(`Example app listening at http://web-af66687d2-fadb.docode.qwasar.io`)
+    console.log(`Your server will be accessible at this URL at http://web-XXXXXXXXX-XXXX.docode.qwasar.io`);
+    console.log("Replace XXXXXXXXX-XXXX with your docode ID. The value before .docode.qwasar.io in the url");
 });
