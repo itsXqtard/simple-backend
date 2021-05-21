@@ -1,12 +1,13 @@
 const express = require('express')
 const basicAuth = require('express-basic-auth')
+const request = require('request');
 const app = express()
 const port = 8080
 
 const server_responses = {
     public : "Everybody can see this page",
     protected : "Welcome, authenticated client",
-    unauthorized : "Not authorized"
+    unauthorized : "401 Not authorized"
 }
 
 const sinatra_songs = [
@@ -77,6 +78,22 @@ app.get('/birth_city', (req, res) => {
  */
 app.get('/wives', (req, res) => {
     res.send(Sinatra.wives.join(', '));
+});
+
+
+app.get('/picture', async (req, res) => {
+  const url = 'https://upload.wikimedia.org/wikipedia/commons/a/af/Frank_Sinatra_%2757.jpg';
+
+  request({
+    url: url,
+    encoding: null
+  }, 
+  (err, resp, buffer) => {
+    if (!err && resp.statusCode === 200){
+      res.set("Content-Type", "image/jpeg");
+      res.send(resp.body);
+    }
+  });
 });
 
 /**
