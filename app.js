@@ -81,6 +81,9 @@ app.get('/wives', (req, res) => {
 });
 
 
+/**
+ * Returns Frank Sinatra's self portrait
+ */
 app.get('/picture', async (req, res) => {
   const picture = '(https://upload.wikimedia.org/wikipedia/commons/a/af/Frank_Sinatra_%2757.jpg)';
   res.send(picture);
