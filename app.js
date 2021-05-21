@@ -1,6 +1,5 @@
 const express = require('express')
 const basicAuth = require('express-basic-auth')
-const request = require('request');
 const app = express()
 const port = 8080
 
